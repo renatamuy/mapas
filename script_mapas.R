@@ -42,8 +42,8 @@ head(pontosf)
 #Plote o mapa usando o ggplot2 como um objeto, ainda sem desenha-lo na tela
 g <- ggplot() + geom_polygon(data = area,
                              aes(x=long, y = lat, group = group),
-                             fill = "lightgrey", color = "lightgrey") + #Note que voce pode mudar as cores do fundo e daborda
-  coord_fixed(1.1) + #Use isto para o mapa nao ficar distorcido
+                             fill = "lightgrey", color = "lightgrey") + #Note que voce pode mudar as cores do fundo e da borda
+  coord_fixed(1.1) + #Use isto para o mapa ficar proporcional
   geom_polygon(data = area, 
                aes(x = long, y = lat, group = group), 
                color = "white", fill = NA, size = 0.04) + #Aqui voce pode escolher a cor das bordas e a espessura delas
@@ -56,10 +56,10 @@ g <- ggplot() + geom_polygon(data = area,
   geom_text_repel(data=pontos, aes(x=long, y=lat, label=ponto))+ #Use isto para os rotulos dos pontos nao ficarem sobrepostos
   
   theme_bw() +
-  ggtitle("Pontos visitados") + #De nome ao plot
+  ggtitle("Pontos visitados") + #De nome ao plot, caso seja necessario
   labs(x="Longitude", y = "Latitude") + #De nome aos eixos
   
-  theme(text = element_text(size=14), #Ajuste os tamanhos das fontes usadas em cada parte
+  theme(text = element_text(size=14), #Ajuste os tamanhos das fontes 
         plot.title = element_text(size=20, hjust=0.5),
         axis.text.x = element_text(size = 10, angle=0, hjust=1),
         axis.text.y = element_text(size = 10, angle=0, vjust=1),
@@ -73,7 +73,7 @@ plot(g)
 
 #Exporte o mapa como uma figura PNG, incluindo agora um norte e uma escala
 png(filename= "mapa_simples.png", #Defina o nome do arquivo
-    res= 300,  height= 20, width=16, unit="cm") #Aqui voce define a resolucao e as proporcoes da imagem
+    res= 300,  height= 20, width=16, unit="cm") #Aqui voce define a resolucao e tamanho da imagem
 
 g +
   ggsn::scalebar(area, dist = 100,location = "bottomright", transform = TRUE, #Adicione uma barra de escala
