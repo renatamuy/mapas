@@ -74,3 +74,5 @@ g +
                  dist_unit = "km", st.dist = 0.03, st.size = 2, model = 'WGS84') +
   ggsn::north(area, scale = .1) #Adicione uma seta com o norte
 dev.off()
+
+#######################
