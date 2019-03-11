@@ -31,12 +31,6 @@ head(pontos)
 #Defina qual sera a area usada como base do mapa
 area <-map_data("nz") #Aqui usamos a Nova Zelandia; Brasil seria "Brazil"
 
-#Para desenhar mapas usando o pacote ggplot2, geralmente eh necessario transformar os dataframes primeiro
-pontosf <- fortify(na.omit(pontos), region = "pontos")
-
-#Confira o objeto transformado
-head(pontosf)
-
 #######################
 
 #Plote o mapa usando o ggplot2 como um objeto, ainda sem desenha-lo na tela
@@ -52,7 +46,7 @@ g <- ggplot() + geom_polygon(data = area,
              color = "purple", #Escolha a cor dos pontos
              size = 2, #Tamanho dos pontos
              alpha = 0.6) + #Transparencia: quanto mais proximo de 1, menos transparente
- 
+  
   geom_text_repel(data=pontos, aes(x=long, y=lat, label=ponto))+ #Use isto para os rotulos dos pontos nao ficarem sobrepostos
   
   theme_bw() +
@@ -80,4 +74,3 @@ g +
                  dist_unit = "km", st.dist = 0.03, st.size = 2, model = 'WGS84') +
   ggsn::north(area, scale = .1) #Adicione uma seta com o norte
 dev.off()
-
