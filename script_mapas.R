@@ -1,49 +1,83 @@
-########################
-# Carregue os pacotes
+#Instale estes pacotes direto dos GitHubs dos autores
 devtools::install_github("slowkow/ggrepel")
 devtools::install_github("oswaldosantos/ggsn")
+
+# Carregue os pacotes necessarios
 library(ggplot2)
 library(ggmap)
 library(ggsn)
 library(maps)
 library(mapdata)
 library(ggrepel)
+
 #######################
 
-setwd("CAMINHO PARA A PASTA QUE VOCÊ BAIXOU NO GITHUB E DESCOMPRIMIU//")
+#Indique a pasta (diretorio) onde estao os arquivos
+
+#Metodo 1: diga que eh a mesma pasta onde esta o script que voce acaba de abrir
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
+#Metodo 2: escreva o caminho completo da pasta para onde baixou os arquivos do GitHub
+#setwd("CAMINHO PARA A PASTA QUE VOCE BAIXOU NO GITHUB E DESCOMPRIMIU//")
+
+#######################
+
+#Importe o arquivo com os pontos do GPS em graus decimais e transforme-o em um objeto de R
 pontos = read.delim("pontos.txt",sep=",", na.strings = "na")
 
-area <-map_data("nz") # Brasil seria Brazil
+#De uma olhada no objeto que acabou de criar para conferir se esta como voce esperava
+head(pontos)
+
+#Defina qual sera a area usada como base do mapa
+area <-map_data("nz") #Aqui usamos a Nova Zelandia; Brasil seria "Brazil"
+
+#Para desenhar mapas usando o pacote ggplot2, geralmente eh necessario transformar os dataframes primeiro
 pontosf <- fortify(na.omit(pontos), region = "pontos")
 
+#Confira o objeto transformado
+head(pontosf)
+
+#######################
+
+#Plote o mapa usando o ggplot2 como um objeto, ainda sem desenha-lo na tela
 g <- ggplot() + geom_polygon(data = area,
                              aes(x=long, y = lat, group = group),
-                             fill = "lightgrey", color = "lightgrey") +
-  coord_fixed(1.1) +
+                             fill = "lightgrey", color = "lightgrey") + #Note que voce pode mudar as cores do fundo e daborda
+  coord_fixed(1.1) + #Use isto para o mapa nao ficar distorcido
   geom_polygon(data = area, 
                aes(x = long, y = lat, group = group), 
-               color = "white", fill = NA, size = 0.04) +
+               color = "white", fill = NA, size = 0.04) + #Aqui voce pode escolher a cor das bordas e a espessura delas
+  
   geom_point(data = pontos, aes(x = long, y = lat), 
-             color = "purple", 
-             size = 2,
-             alpha = 0.6) + #transparência quanto mais próximo de 1, menos transparente
-  geom_text_repel(data=pontos, aes(x=long, y=lat, label=ponto))+
+             color = "purple", #Escolha a cor dos pontos
+             size = 2, #Tamanho dos pontos
+             alpha = 0.6) + #Transparencia: quanto mais proximo de 1, menos transparente
+ 
+  geom_text_repel(data=pontos, aes(x=long, y=lat, label=ponto))+ #Use isto para os rotulos dos pontos nao ficarem sobrepostos
+  
   theme_bw() +
-  ggtitle("Pontos visitados") +
-  labs(x="Longitude", y = "Latitude") +
-  theme(text = element_text(size=14),
+  ggtitle("Pontos visitados") + #De nome ao plot
+  labs(x="Longitude", y = "Latitude") + #De nome aos eixos
+  
+  theme(text = element_text(size=14), #Ajuste os tamanhos das fontes usadas em cada parte
         plot.title = element_text(size=20, hjust=0.5),
         axis.text.x = element_text(size = 10, angle=0, hjust=1),
         axis.text.y = element_text(size = 10, angle=0, vjust=1),
         axis.title.x = element_text(size = 12, angle=0),
         axis.title.y = element_text(size = 12, angle=90))
-#Visualizando a figura
+
+#Vizualize o mapa
 plot(g)
-#Exportando a figura
-png(filename= "mapa_simples.png", res= 300,  height= 20, width=16, unit="cm")
+
+#######################
+
+#Exporte o mapa como uma figura PNG, incluindo agora um norte e uma escala
+png(filename= "mapa_simples.png", #Defina o nome do arquivo
+    res= 300,  height= 20, width=16, unit="cm") #Aqui voce define a resolucao e as proporcoes da imagem
+
 g +
-  ggsn::scalebar(area, dist = 100,location = "bottomright", transform = TRUE,
+  ggsn::scalebar(area, dist = 100,location = "bottomright", transform = TRUE, #Adicione uma barra de escala
                  dist_unit = "km", st.dist = 0.03, st.size = 2, model = 'WGS84') +
-  ggsn::north(area, scale = .1) 
+  ggsn::north(area, scale = .1) #Adicione uma seta com o norte
 dev.off()
 
