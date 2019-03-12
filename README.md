@@ -1,5 +1,5 @@
 # mapas
-Script relacionado ao post Como fazer um mapa no R. Siga os seguintes passos:
+Script relacionado ao post [Como fazer um mapa no R](https://marcoarmello.wordpress.com/2019/03/12/mapa/). Siga os seguintes passos:
 
 * Baixe o script+dados clicando em "Clone or Download" e Depois em "Download ZIP"
 * Descompresse o arquivo no seu computador (Usando ZIP ou WinRAR)
