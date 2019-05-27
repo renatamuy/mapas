@@ -29,7 +29,7 @@ pontos = read.delim("pontos.txt",sep=",", na.strings = "na")
 head(pontos)
 
 #Defina qual sera a area usada como base do mapa
-area <-map_data("nz") #Aqui usamos a Nova Zelandia; Brasil seria "Brazil"
+area <-map_data("nz") #Aqui usamos a Nova Zelandia; para Brasil seria area <-map_data("world", region="Brazil", zoom=5) 
 
 #######################
 
