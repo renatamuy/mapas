@@ -1,5 +1,5 @@
 # mapas
-Script relacionado ao post [Como fazer um mapa no R](https://marcoarmello.wordpress.com/2019/03/12/mapa/). Siga os seguintes passos:
+Script relacionado ao post [Como fazer um mapa no R](https://marcoarmello.wordpress.com/2019/03/12/mapa/) no blog Sobrevivendo na Ciência. Siga os seguintes passos:
 
 Exemplo 1: script_mapas.R
 * Baixe o script+dados clicando em "Clone or download" e Depois em "Download ZIP"
