@@ -2,7 +2,9 @@
 
 install.packages("brazilmaps")
 install.packages("tidyverse")
+
 devtools::install_github("oswaldosantos/ggsn")
+devtools::install_github(“rpradosiqueira/brazilmaps”, force = TRUE)
 
 library(brazilmaps)
 library(ggsn)
