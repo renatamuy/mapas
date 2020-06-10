@@ -10,6 +10,7 @@ https://cran.r-project.org/bin/windows/Rtools/index.html
 
 devtools::install_github("slowkow/ggrepel", force = TRUE)
 devtools::install_github("oswaldosantos/ggsn", force = TRUE)
+devtools::install_github(“rpradosiqueira/brazilmaps”)
 
 # Carregue os pacotes necessarios
 library(ggplot2)
