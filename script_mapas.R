@@ -30,7 +30,7 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 #Metodo 2: escreva o caminho completo da pasta para onde baixou os arquivos do GitHub
 #setwd("CAMINHO PARA A PASTA QUE VOCE BAIXOU NO GITHUB E DESCOMPRIMIU//")
 
-# Cheque o diretório de trabalho
+#Cheque o diretório de trabalho
 getwd()
 #######################
 
@@ -68,7 +68,7 @@ g <- ggplot() + geom_polygon(data = area,
         axis.title.x = element_text(size = 12, angle=0),
         axis.title.y = element_text(size = 12, angle=90))
 
-#Vizualize o mapa básico
+#Vizualize o mapa 
 plot(g)
 
 #######################
