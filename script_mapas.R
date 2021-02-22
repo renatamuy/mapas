@@ -67,7 +67,7 @@ g <- ggplot() + geom_polygon(data = area,
         axis.title.y = element_text(size = 12, angle=90))
 
 #Adicione escala e norte
-g_legenda <- g +legendMap::scale_bar(lon = 176, lat = -47, 
+g_legenda <- g +legendMap::scale_bar(lon = 175, lat = -47, 
                         distance_lon = 100, 
                         distance_lat = 20, 
                         distance_legend = -18, 
