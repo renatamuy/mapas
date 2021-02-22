@@ -9,8 +9,10 @@ https://cran.r-project.org/bin/windows/Rtools/index.html
 #Instale estes pacotes direto dos GitHubs dos autores
 
 devtools::install_github("slowkow/ggrepel", force = TRUE)
-devtools::install_github("oswaldosantos/ggsn", force = TRUE)
 devtools::install_github(“rpradosiqueira/brazilmaps”, force = TRUE)
+
+install.packages("remotes")
+remotes::install_github("3wen/legendMap")
 
 # Carregue os pacotes necessarios
 library(ggplot2)
@@ -18,8 +20,7 @@ library(ggmap)
 library(maps)
 library(mapdata)
 library(ggrepel)
-library(ggsn)
-
+require(legendMap) # Novo pacote para legendas! 
 #######################
 
 #Indique a pasta (diretorio) onde estao os arquivos
@@ -28,7 +29,7 @@ library(ggsn)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 #Metodo 2: escreva o caminho completo da pasta para onde baixou os arquivos do GitHub
-#setwd("CAMINHO PARA A PASTA QUE VOCE BAIXOU NO GITHUB E DESCOMPRIMIU//")
+setwd("D://OneDrive - Massey University//Codes//mapas-master//")
 
 #Cheque o diretório de trabalho
 getwd()
@@ -54,14 +55,11 @@ g <- ggplot() + geom_polygon(data = area,
              color = "purple", #Escolha a cor dos pontos
              size = 2, #Tamanho dos pontos
              alpha = 0.6) + #Transparencia: quanto mais proximo de 1, menos transparente
-  
-  geom_text_repel(data=pontos, aes(x=long, y=lat, label=ponto))+ #Use isto para os rotulos dos pontos nao ficarem sobrepostos
-  
-  theme_bw() +
-  ggtitle("Pontos visitados") + #De nome ao plot, caso seja necessario
-  labs(x="Longitude", y = "Latitude") + #De nome aos eixos
-  
-  theme(text = element_text(size=14), #Ajuste os tamanhos das fontes 
+        geom_text_repel(data=pontos, aes(x=long, y=lat, label=ponto))+ #Use isto para os rotulos dos pontos nao ficarem sobrepostos
+        theme_bw() +
+        ggtitle("Pontos visitados") + #De nome ao plot, caso seja necessario
+        labs(x="Longitude", y = "Latitude") + #De nome aos eixos
+        theme(text = element_text(size=14), #Ajuste os tamanhos das fontes 
         plot.title = element_text(size=20, hjust=0.5),
         axis.text.x = element_text(size = 10, angle=0, hjust=1),
         axis.text.y = element_text(size = 10, angle=0, vjust=1),
@@ -69,19 +67,24 @@ g <- ggplot() + geom_polygon(data = area,
         axis.title.y = element_text(size = 12, angle=90))
 
 #Vizualize o mapa 
-plot(g)
+g_legenda <- g +legendMap::scale_bar(lon = 176, lat = -47, 
+                        distance_lon = 100, 
+                        distance_lat = 20, 
+                        distance_legend = -18, 
+                        dist_unit = "km", 
+                        legend_size= 4,
+                        orientation = TRUE, 
+                        arrow_north_size = 12,
+                        arrow_length = 100, 
+                        arrow_distance = 1500) 
+
+#Vizualize o mapa 
+g_legenda
 
 #######################
-
 #Exporte o mapa como uma figura PNG, incluindo agora um norte e uma escala
 png(filename= "mapa_simples.png", #Defina o nome do arquivo
     res= 300,  height= 20, width=16, unit="cm") #Aqui voce define a resolucao e tamanho da imagem
-
-g +
-  ggsn::scalebar(area, dist = 100,location = "bottomright", transform = TRUE, #Adicione uma barra de escala
-                 dist_unit = "km", st.dist = 0.03, st.size = 2, model = 'WGS84') +
-  ggsn::north(area, scale = .1) #Adicione uma seta com o norte
-
+g_legenda
 dev.off()
-
 #######################
