@@ -29,7 +29,7 @@ require(legendMap) # Novo pacote para legendas!
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 #Metodo 2: escreva o caminho completo da pasta para onde baixou os arquivos do GitHub
-setwd("D://OneDrive - Massey University//Codes//mapas-master//")
+#setwd("D://OneDrive - Massey University//Codes//mapas-master//")
 
 #Cheque o diretório de trabalho
 getwd()
