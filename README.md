@@ -12,6 +12,8 @@ E-mail: renatamuy@gmail.com.
 
 Publicado em 10 de março de 2019 (versão em português).
 
+Atualizado em 23 de fevereiro de 2021 (versão em português).
+
 Rodado no R version 4.0.2 (2020-06-22) -- "Taking Off Again".
 
 Aviso: Você pode usar este script livremente para fins não comerciais por seu próprio risco. Não assumimos nenhuma responsabilidade pelo uso deste software, não transmitimos licença ou título sob nenhuma patente, direito autoral ou mascaramento de direito de trabalho sobre o produto. Reservamo-nos o direito de fazer alterações no software sem notificação. Também não declaramos ou garantimos que esse aplicativo seja adequado para o uso especificado sem testes ou modificações adicionais. Se esse script o ajudar a produzir algum trabalho acadêmico (artigo, livro, capítulo, dissertação etc.), por favor, reconheça os autores e cite a fonte.
