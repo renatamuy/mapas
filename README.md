@@ -1,4 +1,4 @@
-# mapas
+# mapas :world_map:
 
 Códigos de R usados no post [Como fazer um mapa no R](https://marcoarmello.wordpress.com/2019/03/12/mapa/).
 
