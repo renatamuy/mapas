@@ -66,7 +66,7 @@ g <- ggplot() + geom_polygon(data = area,
         axis.title.x = element_text(size = 12, angle=0),
         axis.title.y = element_text(size = 12, angle=90))
 
-#Vizualize o mapa 
+#Adicione escala e norte
 g_legenda <- g +legendMap::scale_bar(lon = 176, lat = -47, 
                         distance_lon = 100, 
                         distance_lat = 20, 
@@ -82,7 +82,7 @@ g_legenda <- g +legendMap::scale_bar(lon = 176, lat = -47,
 g_legenda
 
 #######################
-#Exporte o mapa como uma figura PNG, incluindo agora um norte e uma escala
+#Exporte o mapa como uma figura PNG
 png(filename= "mapa_simples.png", #Defina o nome do arquivo
     res= 300,  height= 20, width=16, unit="cm") #Aqui voce define a resolucao e tamanho da imagem
 g_legenda
