@@ -20,7 +20,7 @@ library(ggmap)
 library(maps)
 library(mapdata)
 library(ggrepel)
-require(legendMap) # Novo pacote para legendas! 
+require(legendMap) # Esse pacote para legendas depende do pacote maptools, que foi removido do CRAN em 2023
 #######################
 
 #Indique a pasta (diretorio) onde estao os arquivos
